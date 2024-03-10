@@ -1,10 +1,11 @@
+using ContactBook.Bussiness.HashBased;
 using ContactBook.Bussiness.Models;
 
 namespace ContactBook.Bussiness;
 
 public class ContactBook
 {
-    private readonly TrieBasedContactSearcher _contactSearcher;
+    private readonly HashBasedContactSearcher _contactSearcher;
     public ContactBook(IReadOnlyList<Contact> allContacts)
     {
         _contactSearcher = new(allContacts);
