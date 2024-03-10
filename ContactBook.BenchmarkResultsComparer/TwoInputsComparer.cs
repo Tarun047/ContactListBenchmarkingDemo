@@ -71,6 +71,7 @@ namespace ResultsComparer
             {
                 var worseGeoMean = Math.Pow(10, worse.Skip(1).Aggregate(Math.Log10(GetRatio(worse.First())), (x, y) => x + Math.Log10(GetRatio(y))) / worse.Count());
                 Console.WriteLine($"worse: {worseCount}, geomean: {worseGeoMean:F3}");
+                Environment.ExitCode = -1;
             }
 
             Console.WriteLine($"total diff: {notSame.Count()}");
