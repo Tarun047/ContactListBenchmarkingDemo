@@ -1,7 +1,6 @@
 using BenchmarkDotNet.Attributes;
 using Bogus;
 using ContactBook.Bussiness.Models;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace ContactBook.Benchmark.DataGen;
 

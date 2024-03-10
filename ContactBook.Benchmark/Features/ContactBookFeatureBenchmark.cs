@@ -2,7 +2,7 @@ using BenchmarkDotNet.Attributes;
 using ContactBook.Benchmark.DataGen;
 using ContactBook.Bussiness.Models;
 
-namespace ContactBook.Benchmark;
+namespace ContactBook.Benchmark.Features;
 
 [MemoryDiagnoser(false)]
 public class ContactBookFeatureBenchmark : ContactBookDataGenBase
