@@ -1,10 +1,11 @@
 using ContactBook.Bussiness.Models;
+using ContactBook.Bussiness.RegexBased;
 
 namespace ContactBook.Bussiness;
 
 public class ContactBook
 {
-    private readonly TrieBasedContactSearcher _contactSearcher;
+    private readonly RegexBasedContactSearcher _contactSearcher;
     public ContactBook(IReadOnlyList<Contact> allContacts)
     {
         _contactSearcher = new(allContacts);
