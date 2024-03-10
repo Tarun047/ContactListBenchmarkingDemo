@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  benchmark:
     runs-on: ubuntu-latest  # For a list of available runner types, refer to
     # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
@@ -22,14 +22,14 @@ jobs:
           dotnet-version: 8.0.x
       
       # Run benchmarks
-      - name: Run Benchmarks
+      - name: Run Benchmarks on Current Branch
         run: dotnet run -c Release --project ContactBook.Benchmark --filter ContactBook.Benchmark.Features* --artifacts BenchmarkDotNet.Artifacts.Current
       
       # Upload the Results: https://github.com/marketplace/actions/upload-a-build-artifact  
       - name: Upload current benchmark artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: Benchmark Artifacts Main
+          name: BenchmarkDotNet.Artifacts.Current
           path: BenchmarkDotNet.Artifacts.Current
       
       # Checkout to main branch
@@ -37,16 +37,17 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+          clean: false
       
       # Run benchmarks on main branch
-      - name: Run Benchmarks
+      - name: Run Benchmarks on Main
         run: dotnet run -c Release --project ContactBook.Benchmark --filter ContactBook.Benchmark.Features* --artifacts BenchmarkDotNet.Artifacts.Main
         
       # Upload the Results: https://github.com/marketplace/actions/upload-a-build-artifact  
-      - name: Upload current benchmark artifacts
+      - name: Upload main benchmark artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: Benchmark Artifacts Main
+          name: BenchmarkDotNet.Artifacts.Main
           path: BenchmarkDotNet.Artifacts.Main
 
       # Compare the benchmarks
