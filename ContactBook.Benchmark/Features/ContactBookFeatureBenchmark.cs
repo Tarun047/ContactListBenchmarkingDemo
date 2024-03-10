@@ -5,6 +5,7 @@ using ContactBook.Bussiness.Models;
 namespace ContactBook.Benchmark.Features;
 
 [MemoryDiagnoser(false)]
+[JsonExporterAttribute.Full]
 public class ContactBookFeatureBenchmark : ContactBookDataGenBase
 {
     [Benchmark]

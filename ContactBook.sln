@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBook.Benchmark", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBook.Bussiness.Test", "ContactBook.Bussiness.Test\ContactBook.Bussiness.Test.csproj", "{6E775358-25B7-401A-B68D-B06D8394B4BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBook.BenchmarkResultsComparer", "ContactBook.BenchmarkResultsComparer\ContactBook.BenchmarkResultsComparer.csproj", "{FC26C1EE-1F4B-46F0-B59B-C34785EB1065}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{6E775358-25B7-401A-B68D-B06D8394B4BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E775358-25B7-401A-B68D-B06D8394B4BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E775358-25B7-401A-B68D-B06D8394B4BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC26C1EE-1F4B-46F0-B59B-C34785EB1065}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC26C1EE-1F4B-46F0-B59B-C34785EB1065}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC26C1EE-1F4B-46F0-B59B-C34785EB1065}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC26C1EE-1F4B-46F0-B59B-C34785EB1065}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,25 +1,17 @@
-name: .NET Core Build
+name: Benchmark Main
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-
   build:
-
-    strategy:
-      matrix:
-        configuration: [Release]
-
     runs-on: ubuntu-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -33,13 +25,13 @@ jobs:
     - name: Execute unit tests
       run: dotnet test
 
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Run the release Benchmarks
-      run: dotnet run -c Release --project ContactBook.Benchmark --filter ContactBook.Benchmark.Features*
-
-    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
+    # Run benchmarks
+    - name: Run Benchmarks
+      run: dotnet run -c Release --project ContactBook.Benchmark --filter ContactBook.Benchmark.Features* --artifacts BenchmarkDotNet.Artifacts.Main
+      
+    # Upload the Results: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload benchmark artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: Benchmark Artifacts
-        path: BenchmarkDotNet.Artifacts
+        name: Benchmark Artifacts Main
+        path: BenchmarkDotNet.Artifacts.Main
