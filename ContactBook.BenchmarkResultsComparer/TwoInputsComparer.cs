@@ -21,10 +21,15 @@ namespace ResultsComparer
                 return;
             }
 
-            PrintSummary(notSame);
+            var hasRegression = PrintSummaryAndCheckForRegression(notSame);
 
             PrintTable(notSame, EquivalenceTestConclusion.Slower, args);
             PrintTable(notSame, EquivalenceTestConclusion.Faster, args);
+
+            if (hasRegression)
+            {
+                throw new SystemException("Regression detected!");
+            }
         }
 
         private static IEnumerable<(string id, Benchmark baseResult, Benchmark diffResult, EquivalenceTestConclusion conclusion)> GetNotSameResults(TwoInputsOptions args)
@@ -47,7 +52,7 @@ namespace ResultsComparer
             }
         }
 
-        private static void PrintSummary((string id, Benchmark baseResult, Benchmark diffResult, EquivalenceTestConclusion conclusion)[] notSame)
+        private static bool PrintSummaryAndCheckForRegression((string id, Benchmark baseResult, Benchmark diffResult, EquivalenceTestConclusion conclusion)[] notSame)
         {
             var better = notSame.Where(result => result.conclusion == EquivalenceTestConclusion.Faster);
             var worse = notSame.Where(result => result.conclusion == EquivalenceTestConclusion.Slower);
@@ -71,11 +76,13 @@ namespace ResultsComparer
             {
                 var worseGeoMean = Math.Pow(10, worse.Skip(1).Aggregate(Math.Log10(GetRatio(worse.First())), (x, y) => x + Math.Log10(GetRatio(y))) / worse.Count());
                 Console.WriteLine($"worse: {worseCount}, geomean: {worseGeoMean:F3}");
-                Environment.ExitCode = -1;
+                return true;
             }
 
             Console.WriteLine($"total diff: {notSame.Count()}");
             Console.WriteLine();
+
+            return false;
         }
 
         private static void PrintTable((string id, Benchmark baseResult, Benchmark diffResult, EquivalenceTestConclusion conclusion)[] notSame, EquivalenceTestConclusion conclusion, TwoInputsOptions args)
