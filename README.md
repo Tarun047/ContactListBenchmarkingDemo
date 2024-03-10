@@ -1,4 +1,4 @@
-#ContactListBenchmarkingDemo
+# ContactListBenchmarkingDemo
 
 1. This repo consists of a simple Dotnet Application created to demonstrate how to benchmark using [BenchmarkDotNet](url)
 2. We explore various approaches to solve the problem of prefix search among a given list of strings.
